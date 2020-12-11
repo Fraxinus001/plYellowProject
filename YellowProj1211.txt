@@ -1,0 +1,10 @@
+Discussion : Code demonstration
+
+In today's activity we've discussed on the improvements
+ and beautification of the code in preparation for the 
+upcoming demonstration of the project in Dec. 15. 
+In addition of our classmates get to test and evaluate our project/code, 
+with that said our group conformed to make the code more compact 
+by reducing lines and replacing them by import prompts and other commands.
+ In conclusion we've managed to finish the project ahead of the given due
+ and prepare ourselves for the finals week and the upcoming demonstration.
