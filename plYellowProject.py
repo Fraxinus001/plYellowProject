@@ -1,11 +1,9 @@
 # P.D.C.Ponciano, E.Serrano, D.E.G.Ty, F.S.Tale BES241
 # plYellowProject December 3, 2020
 
+#  Starting point for the Core of the Program:
 import datetime
 import pickle
-
-
-#  Starting point for the Core of the Program:
 
 
 def readmode(data):
