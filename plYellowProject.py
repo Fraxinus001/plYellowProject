@@ -6,6 +6,7 @@ import datetime
 import pickle
 from collections import defaultdict
 
+
 def readmode(data):
     return open(data, "rb")
 
@@ -14,7 +15,7 @@ def writemode(data):
     return open(data, "wb")
 
 
-def loadspeciallists(dx):  #  Used for d5 and above rank dictionaries.
+def loadspeciallists(dx):  # Used for d5 and above rank dictionaries.
     return defaultdict(list, dx)
 
 
@@ -26,8 +27,8 @@ def main():
         dat3 = readmode("bookXavail.dat")
         dat4 = readmode("bookXcustloc.dat")
         dat5 = readmode("bookXbrwusers.dat")
-        dat6 = readmode("bookXfrzusers.dat")
-        dat7 = readmode("bookXbrwdate.dat")
+        dat6 = readmode("bookXbrwdate.dat")  # Error Corrected
+        dat7 = readmode("bookXfrzusers.dat")  # Error Corrected
         dat8 = readmode("bookXrtndate.dat")
         #  Declare individual databanks as variable:
         d1 = pickle.load(dat1)  # Author
@@ -242,18 +243,84 @@ def main():
                     d5 = loadspeciallists(d5)
                     for key in dict(d1):
                         if key == e:
-                            print(d5)
+                            print(d5)  # Debug
                             if name in d5[e]:
                                 newname = str(input("Please specify the correct name for the borrower: "))
                                 g = d5[e].index(name)
                                 h = d5[e][g]
                                 d5[e].remove(name)
                                 d5[e].insert(g, newname)
-                                print(d5[e][g])
+                                print(d5[e][g])  # Debug
                                 #  Store data to databank file:
                                 dat5 = writemode("bookXbrwusers.dat")
                                 pickle.dump(d5, dat5)  # Borrowers Name
                                 print("{} borrower {}'s name has been changed to {}".format(e, h, d5[e][g]))
+                                closedatabank()
+                                input("Press any key to continue.")
+                elif q == "BD":
+                    name = str(input("Please specify the name of the borrower you want the date changed: "))
+                    e = str(input("Please specify the book this person borrowed: "))
+                    d5 = loadspeciallists(d5)
+                    d6 = loadspeciallists(d6)
+                    for key in dict(d1):
+                        if key == e:
+                            print(d6)  # Debug
+                            if name in d5[e]:
+                                newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
+                                g = d5[e].index(name)
+                                h = d5[e][g]
+                                i = d6[e][g]
+                                d6[e].remove(i)
+                                d6[e].insert(g, newdate)
+                                print(d6[e])  # Debug
+
+                                #  Store data to databank file:
+                                dat6 = writemode("bookXbrwdate.dat")
+                                pickle.dump(d6, dat6)  # Borrowers Date
+                                print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d6[e][g]))
+                                closedatabank()
+                                input("Press any key to continue.")
+                elif q == "RN":
+                    name = str(input("Please specify the name of the borrower you want the name changed: "))
+                    e = str(input("Please specify the book this person borrowed: "))
+                    d7 = loadspeciallists(d7)
+                    for key in dict(d1):
+                        if key == e:
+                            print(d7)  # Debug
+                            if name in d7[e]:
+                                newname = str(input("Please specify the correct name for the borrower: "))
+                                g = d7[e].index(name)
+                                h = d7[e][g]
+                                d7[e].remove(name)
+                                d7[e].insert(g, newname)
+                                print(d7[e][g])  # Debug
+                                #  Store data to databank file:
+                                dat7 = writemode("bookXfrzusers.dat")
+                                pickle.dump(d7, dat7)  # Returnees Name
+                                print("{} past borrower {}'s name has been changed to {}".format(e, h, d7[e][g]))
+                                closedatabank()
+                                input("Press any key to continue.")
+                elif q == "RD":
+                    name = str(input("Please specify the name of the borrower you want the date changed: "))
+                    e = str(input("Please specify the book this person borrowed: "))
+                    d7 = loadspeciallists(d7)
+                    d8 = loadspeciallists(d8)
+                    for key in dict(d1):
+                        if key == e:
+                            print(d6)  # Debug
+                            if name in d7[e]:
+                                newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
+                                g = d7[e].index(name)
+                                h = d7[e][g]
+                                i = d8[e][g]
+                                d8[e].remove(i)
+                                d8[e].insert(g, newdate)
+                                print(d8[e])  # Debug
+
+                                #  Store data to databank file:
+                                dat8 = writemode("bookXrtndate.dat")
+                                pickle.dump(d8, dat8)  # Returnees Date
+                                print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d8[e][g]))
                                 closedatabank()
                                 input("Press any key to continue.")
                 else:
