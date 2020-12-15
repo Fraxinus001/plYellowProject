@@ -15,7 +15,7 @@ def writemode(data):
 
 
 def loadspeciallists(dx):  #  Used for d5 and above rank dictionaries.
-    defaultdict(list, dx)
+    return defaultdict(list, dx)
 
 
 def main():
@@ -88,13 +88,19 @@ def main():
                 print("֎ RETURNEE Display details of who returned this book and when(returnee) \n")
                 x = str.lower(input("Please input the course of action to do: "))
                 if x == "borrower":
-                    print(f"\033[1mBook Title:\033[0m ֎{i}֎ \n"
-                          f"\033[1mBorrowed by:\033[0m © {d5[i]} \n"
-                          f"\033[1mBorrowed on:\033[0m © {d6[i]} \n")
+                    d5 = loadspeciallists(d5)
+                    for key in dict(d1):
+                        if key == i:
+                            print(f"\033[1mBook Title:\033[0m ֎ {i} ֎ \n"
+                                  f"\033[1mBorrowed by:\033[0m © {d5[i]} \n"
+                                  f"\033[1mBorrowed on:\033[0m © {d6[i]} \n")
                 elif x == "returnee":
-                    print(f"\033[1mBook Title:\033[0m ֎{i}֎ \n"
-                          f"\033[1mReturned by:\033[0m © {d5[i]} \n"
-                          f"\033[1mReturned on:\033[0m © {d6[i]} \n")
+                    d5 = loadspeciallists(d5)
+                    for key in dict(d1):
+                        if key == i:
+                            print(f"\033[1mBook Title:\033[0m ֎ {i} ֎ \n"
+                                  f"\033[1mReturned by:\033[0m © {d5[i]} \n"
+                                  f"\033[1mReturned on:\033[0m © {d6[i]} \n")
                 input("Press any key to continue.")
         elif x == "add":
             q = repetition()
@@ -233,9 +239,10 @@ def main():
                 elif q == "BN":
                     name = str(input("Please specify the name of the borrower you want the name changed: "))
                     e = str(input("Please specify the book this person borrowed: "))
+                    d5 = loadspeciallists(d5)
                     for key in dict(d1):
                         if key == e:
-                            print(d5[e])
+                            print(d5)
                             if name in d5[e]:
                                 newname = str(input("Please specify the correct name for the borrower: "))
                                 g = d5[e].index(name)
