@@ -3,7 +3,7 @@
 ## The project is to create a Library System using Python Programming Language. ##
 [Project Documentation](https://docs.google.com/document/d/1FsQvHVZmjP_6qb4n9rJ_iVk1nJhRS8yI4poXn7bghkw/edit#heading=h.42rde8xze3ow "Project Documentation")
 [Project Demonstration](https://youtu.be/yvwOTAmtMco "Project Demonstration")
-[Project Demonstration](https://docs.google.com/document/d/1W0f2z435IWYHgr2PWJSHGgEnkNZTwmySMb8eC7MHz6U/edit)
+[User Manual](https://docs.google.com/document/d/1W0f2z435IWYHgr2PWJSHGgEnkNZTwmySMb8eC7MHz6U/edit)
 
 ### Contributors: ###
 ### Team Leader: ###
