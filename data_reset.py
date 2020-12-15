@@ -90,11 +90,13 @@ def writemode(data):
     return open(data, "wb")
 
 
+print(brwuser)
+
 pickle.dump(d1, (writemode("bookXauthor.dat")))
 pickle.dump(d2, (writemode("bookXpbdate.dat")))
 pickle.dump(d3, (writemode("bookXavail.dat")))
 pickle.dump(d4, (writemode("bookXcustloc.dat")))
-pickle.dump(brwuser, (writemode("bookXusers.dat")))
+pickle.dump(brwuser, (writemode("bookXbrwusers.dat")))
 pickle.dump(rtnuser, (writemode("bookXfrzusers.dat")))
 pickle.dump(brwdate, (writemode("bookXbrwdate.dat")))
 pickle.dump(rtndate, (writemode("bookXrtndate.dat")))
