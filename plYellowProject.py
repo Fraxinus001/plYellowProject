@@ -342,7 +342,6 @@ def main():
                         print(f"A copy of book '{e}' has been borrowed by {b} at this library on {Datenow}.")
                         closedatabank()
                         input("Press any key to continue.")
-                        break
                 else:
                     print(f"No more remaining cop(y/ies) for '{e}' book available.")
                     input("Press any key to continue.")
