@@ -36,8 +36,8 @@ def main():
         d3 = pickle.load(dat3)  # Numbers of Available Books
         d4 = pickle.load(dat4)  # Location
         d5 = pickle.load(dat5)  # Borrower Usernames
-        d6 = pickle.load(dat6)  # Borrower Date
-        d7 = pickle.load(dat7)  # Returnee Usernames
+        d6 = pickle.load(dat6)  # Borrower Date  # Error Corrected
+        d7 = pickle.load(dat7)  # Returnee Usernames  # Error Corrected
         d8 = pickle.load(dat8)  # Returnee Date
         #  Banner:
         print("\n\033[1mWelcome To Library\033[0m")
@@ -45,20 +45,14 @@ def main():
         print("Please choose from the following commands below: ")
         print("֎ DISPLAY Book details(display), \n֎ ADD New Book(add), \n֎ CHANGE Book details(change)")
         print("֎ BORROW Book(borrow), \n֎ RETURN Book(return), \n֎ DELETE a Book(delete) ")
-        print("or EXIT program(quit) \n")
+        print("or QUIT program(quit) \n")
         #  Initialize date acquisition script:
         Datenow = datetime.date.today().strftime("%B-%d-%Y")
 
         #  Definition for closing all currently-accessed databanks:
         def closedatabank():
-            dat1.close()
-            dat2.close()
-            dat3.close()
-            dat4.close()
-            dat5.close()
-            dat6.close()
-            dat7.close()
-            dat8.close()
+            dat1.close(), dat2.close(), dat3.close(), dat4.close(), dat5.close(), dat6.close(), dat7.close(), \
+                dat8.close()
 
         def repetition():
             return int(input("Please specify how many repetitions for this action: "))
@@ -243,107 +237,87 @@ def main():
                     name = str(input("Please specify the name of the borrower you want the name changed: "))
                     e = str(input("Please specify the book this person borrowed: "))
                     d5 = loadspeciallists(d5)
-                    for key in dict(d1):
-                        if key == e:
-                            print(d5)  # Debug
-                            if name in d5[e]:
-                                newname = str(input("Please specify the correct name for the borrower: "))
-                                g = d5[e].index(name)
-                                h = d5[e][g]
-                                d5[e].remove(name)
-                                d5[e].insert(g, newname)
-                                print(d5[e][g])  # Debug
-                                #  Store data to databank file:
-                                dat5 = writemode("bookXbrwusers.dat")
-                                pickle.dump(d5, dat5)  # Borrowers Name
-                                print("{} borrower {}'s name has been changed to {}".format(e, h, d5[e][g]))
-                                closedatabank()
-                                input("Press any key to continue.")
-                            else:
-                                print("There was no record that the borrower borrowed this book. Please recheck.")
+                    if e in dict(d1):
+                        print(d5)  # Debug
+                        if name in d5[e]:
+                            newname = str(input("Please specify the correct name for the borrower: "))
+                            g = d5[e].index(name)
+                            h = d5[e][g]
+                            d5[e].remove(name)
+                            d5[e].insert(g, newname)
+                            print(d5[e][g])  # Debug
+                            #  Store data to databank file:
+                            dat5 = writemode("bookXbrwusers.dat")
+                            pickle.dump(d5, dat5)  # Borrowers Name
+                            print("{} borrower {}'s name has been changed to {}".format(e, h, d5[e][g]))
+                            closedatabank()
+                            input("Press any key to continue.")
                         else:
-                            print("The inputted book is missing from the records. Please recheck.")
+                            print("There was no record that the borrower borrowed this book. Please recheck.")
                 elif q == "BD":
                     name = str(input("Please specify the name of the borrower you want the date changed: "))
                     e = str(input("Please specify the book this person borrowed: "))
                     d5 = loadspeciallists(d5)
                     d6 = loadspeciallists(d6)
-                    for key in dict(d1):
-                        if key == e:
-                            print(d6)  # Debug
-                            if name in d5[e]:
-                                newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
-                                g = d5[e].index(name)
-                                h = d5[e][g]
-                                i = d6[e][g]
-                                d6[e].remove(i)
-                                d6[e].insert(g, newdate)
-                                print(d6[e])  # Debug
+                    if e in dict(d1):
+                        if name in d5[e]:
+                            newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
+                            g = d5[e].index(name)
+                            h = d5[e][g]
+                            i = d6[e][g]
+                            d6[e].remove(i)
+                            d6[e].insert(g, newdate)
+                            print(d6[e])  # Debug
 
-                                #  Store data to databank file:
-                                dat6 = writemode("bookXbrwdate.dat")
-                                pickle.dump(d6, dat6)  # Borrowers Date
-                                print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d6[e][g]))
-                                closedatabank()
-                                input("Press any key to continue.")
-                            else:
-                                print("There was no record that the borrower borrowed this book. Please recheck.")
+                            #  Store data to databank file:
+                            dat6 = writemode("bookXbrwdate.dat")
+                            pickle.dump(d6, dat6)  # Borrowers Date
+                            print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d6[e][g]))
+                            closedatabank()
+                            input("Press any key to continue.")
                         else:
-                            print("The inputted book is missing from the records. Please recheck.")
+                            print("There was no record that the borrower borrowed this book. Please recheck.")
                 elif q == "RN":
                     name = str(input("Please specify the name of the borrower you want the name changed: "))
                     e = str(input("Please specify the book this person borrowed: "))
                     d7 = loadspeciallists(d7)
-                    for key in dict(d1):
-                        if key == e:
-                            print(d7)  # Debug
-                            if name in d7[e]:
-                                newname = str(input("Please specify the correct name for the borrower: "))
-                                g = d7[e].index(name)
-                                h = d7[e][g]
-                                d7[e].remove(name)
-                                d7[e].insert(g, newname)
-                                print(d7[e][g])  # Debug
-                                #  Store data to databank file:
-                                dat7 = writemode("bookXfrzusers.dat")
-                                pickle.dump(d7, dat7)  # Returnees Name
-                                print("{} past borrower {}'s name has been changed to {}".format(e, h, d7[e][g]))
-                                closedatabank()
-                                input("Press any key to continue.")
-                            else:
-                                print("There was no record that the borrower returned this book. Please recheck.")
+                    if e in dict(d1):
+                        if name in d7[e]:
+                            newname = str(input("Please specify the correct name for the borrower: "))
+                            g = d7[e].index(name)
+                            h = d7[e][g]
+                            d7[e].remove(name)
+                            d7[e].insert(g, newname)
+                            #  Store data to databank file:
+                            dat7 = writemode("bookXfrzusers.dat")
+                            pickle.dump(d7, dat7)  # Returnees Name
+                            print("{} past borrower {}'s name has been changed to {}".format(e, h, d7[e][g]))
+                            closedatabank()
+                            input("Press any key to continue.")
                         else:
-                            print("The inputted book is missing from the records. Please recheck.")
+                            print("There was no record that the borrower returned this book. Please recheck.")
                 elif q == "RD":
                     name = str(input("Please specify the name of the borrower you want the date changed: "))
                     e = str(input("Please specify the book this person borrowed: "))
                     d7 = loadspeciallists(d7)
                     d8 = loadspeciallists(d8)
-                    for key in dict(d1):
-                        if key == e:
-                            print(d6)  # Debug
-                            if name in d7[e]:
-                                newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
-                                g = d7[e].index(name)
-                                h = d7[e][g]
-                                i = d8[e][g]
-                                d8[e].remove(i)
-                                d8[e].insert(g, newdate)
-                                print(d8[e])  # Debug
+                    if e in dict(d1):
+                        if name in d7[e]:
+                            newdate = str(input("Please specify the correct date of borrowing for the borrower: "))
+                            g = d7[e].index(name)
+                            h = d7[e][g]
+                            i = d8[e][g]
+                            d8[e].remove(i)
+                            d8[e].insert(g, newdate)
 
-                                #  Store data to databank file:
-                                dat8 = writemode("bookXrtndate.dat")
-                                pickle.dump(d8, dat8)  # Returnees Date
-                                print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d8[e][g]))
-                                closedatabank()
-                                input("Press any key to continue.")
-                            else:
-                                print("There was no record that the borrower returned this book. Please recheck.")
+                            #  Store data to databank file:
+                            dat8 = writemode("bookXrtndate.dat")
+                            pickle.dump(d8, dat8)  # Returnees Date
+                            print("{} borrower {}'s borrowing date has been changed to {}".format(e, h, d8[e][g]))
+                            closedatabank()
+                            input("Press any key to continue.")
                         else:
-                            print("The inputted book is missing from the records. Please recheck.")
-                else:
-                    print("Book not found. Please recheck and try again!")
-                    input("Press any key to continue.")
+                            print("There was no record that the borrower returned this book. Please recheck.")
         elif x == "borrow":
             q = repetition()
             for _ in range(0, q):
@@ -354,23 +328,21 @@ def main():
                     b = str(input("Please specify the name of the borrower: "))
                     d5 = loadspeciallists(d5)
                     d6 = loadspeciallists(d6)
-                    for key in dict(d1):
-                        if key == e:
-                            d5[e].insert(-1, b)
-                            d6[e].insert(-1, Datenow)
+                    if e in d1:
+                        d5[e].insert(-1, b)
+                        d6[e].insert(-1, Datenow)
 
-                            #  Store data to databank file:
-                            dat3 = writemode("bookXavail.dat")
-                            dat5 = writemode("bookXbrwusers.dat")
-                            dat6 = writemode("bookXbrwdate.dat")
-                            pickle.dump(d3, dat3)  # Numbers of Available Books
-                            pickle.dump(d5, dat5)  # Borrower Name
-                            pickle.dump(d6, dat6)  # Borrowing Date
-                            print(f"A copy of book '{e}' has been borrowed by {b} at this library on {Datenow}. \n")
-                            closedatabank()
-                            input("Press any key to continue.")
-                        else:
-                            print("The inputted book is missing from the records. Please recheck.")
+                        #  Store data to databank file:
+                        dat3 = writemode("bookXavail.dat")
+                        dat5 = writemode("bookXbrwusers.dat")
+                        dat6 = writemode("bookXbrwdate.dat")
+                        pickle.dump(d3, dat3)  # Numbers of Available Books
+                        pickle.dump(d5, dat5)  # Borrower Name
+                        pickle.dump(d6, dat6)  # Borrowing Date
+                        print(f"A copy of book '{e}' has been borrowed by {b} at this library on {Datenow}.")
+                        closedatabank()
+                        input("Press any key to continue.")
+                        break
                 else:
                     print(f"No more remaining cop(y/ies) for '{e}' book available.")
                     input("Press any key to continue.")
@@ -381,34 +353,31 @@ def main():
                 name = nameinputr()
                 d5 = loadspeciallists(d5)
                 d6 = loadspeciallists(d6)
-                for key in dict(d1):
-                    if key == e:
-                        if name in d5[e]:
-                            d3[e] += 1
-                            r = d5[e].index(name)
-                            d5[e].remove(name)
-                            d6[e].pop(r)
-                            d7[e].insert(-1, name)
-                            d8[e].insert(-1, Datenow)
+                if e in dict(d1):
+                    if name in d5[e]:
+                        d3[e] += 1
+                        r = d5[e].index(name)
+                        d5[e].remove(name)
+                        d6[e].pop(r)
+                        d7[e].insert(-1, name)
+                        d8[e].insert(-1, Datenow)
 
-                            #  Store data to databank file:
-                            dat3 = writemode("bookXavail.dat")
-                            dat5 = writemode("bookXbrwusers.dat")
-                            dat6 = writemode("bookXbrwdate.dat")
-                            dat7 = writemode("bookXfrzusers.dat")
-                            dat8 = writemode("bookXrtndate.dat")
-                            pickle.dump(d3, dat3)  # Numbers of Available Books
-                            pickle.dump(d5, dat5)  # Borrowers Name
-                            pickle.dump(d6, dat6)  # Borrowing Date
-                            pickle.dump(d7, dat7)  # Returnees Name
-                            pickle.dump(d8, dat8)  # Return Date
-                            print(f"The book '{e}' has just been returned to this library by {name} on {Datenow}.")
-                            closedatabank()
-                            input("Press any key to continue.")
-                        else:
-                            print("There was no record that the borrower borrowed this book. Please recheck.")
+                        #  Store data to databank file:
+                        dat3 = writemode("bookXavail.dat")
+                        dat5 = writemode("bookXbrwusers.dat")
+                        dat6 = writemode("bookXbrwdate.dat")
+                        dat7 = writemode("bookXfrzusers.dat")
+                        dat8 = writemode("bookXrtndate.dat")
+                        pickle.dump(d3, dat3)  # Numbers of Available Books
+                        pickle.dump(d5, dat5)  # Borrowers Name
+                        pickle.dump(d6, dat6)  # Borrowing Date
+                        pickle.dump(d7, dat7)  # Returnees Name
+                        pickle.dump(d8, dat8)  # Return Date
+                        print(f"The book '{e}' has just been returned to this library by {name} on {Datenow}.")
+                        closedatabank()
+                        input("Press any key to continue.")
                     else:
-                        print("The inputted book is missing from the records. Please recheck.")
+                        print("There was no record that the borrower borrowed this book. Please recheck.")
         elif x == "delete":
             print("Delete a book")
             q = repetition()
@@ -469,10 +438,10 @@ while True:
         main()
     except KeyError:
         print("Book currently not available. Please check if there are spelling mistakes, "
-              "\nor you might need to add this book to the system.")
+              "\nor you might need to add this book to the system first.")
         input("Press any key to continue.")
     except ValueError:
-        print("Wrong input. Please check your inputs and retry.")
+        print("Wrong input. Please double-check your inputs and retry.")
         input("Press any key to continue.")
         continue
       
