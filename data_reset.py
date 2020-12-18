@@ -30,6 +30,17 @@ brwuser = {"Yakusoku no Neverland": ["Ryan", "Josephine"],
                               "Noli Me Tangere": ["Ryan", "Josephine"],
                               "El Filibusterismo": ["Ryan", "Josephine"]}
 
+brwmail =  {"Yakusoku no Neverland": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "The Little Prince": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Naruto": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "KonoSuba": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Avengers":["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Harry Potter": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Carrie": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Gone with the Wind": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "Noli Me Tangere": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"],
+                              "El Filibusterismo": ["usermail@donbosco.edu.ph", "usermail@donbosco.edu.ph"]}
+
 brwdate = {"Yakusoku no Neverland": ["Dec. 1, 2020", "Dec. 8, 2020"],
                               "The Little Prince": ["July 9, 2020", "June 13, 2020"],
                               "Naruto": ["August 5, 2020", "May 22, 2020"],
@@ -100,6 +111,7 @@ pickle.dump(brwuser, (writemode("bookXbrwusers.dat")))
 pickle.dump(rtnuser, (writemode("bookXfrzusers.dat")))
 pickle.dump(brwdate, (writemode("bookXbrwdate.dat")))
 pickle.dump(rtndate, (writemode("bookXrtndate.dat")))
+pickle.dump(brwmail, (writemode("bookXbrwmail.dat")))
 
 
 
